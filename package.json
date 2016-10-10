@@ -19,6 +19,7 @@
     "juandc",
     "fjuandc",
     "react",
+    "tvify",
     "tvmaze"
   ],
   "author": "Juan David Castro <juandavidcastrogallego@gmail.com> (http://juandc.github.io/)",
@@ -32,10 +33,10 @@
     "node-jsx": "^0.13.3",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "request": "^2.75.0",
     "react-engine": "^4.1.0"
   },
   "dependencies": {
     "nodemon": "^1.11.0",
-    "request": "^2.75.0"
   }
 }

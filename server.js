@@ -2,12 +2,11 @@
 
 require('node-jsx').install({ harmony: true })
 
-const express = require('express')
-const http = require('http')
-const request = require('request')
+const express     = require('express')
+const request     = require('request')
 const reactEngine = require('react-engine')
-const app = express()
-const port = process.env.PORT || 3000
+const app         = express()
+const port        = process.env.PORT || 3000
 
 const engine = reactEngine.server.create()
 app.set('views', __dirname + '/views')
@@ -40,6 +39,10 @@ app.get('/', (req, res) => {
   }
   console.log('Request for ' + search)
 })
+
+// app.get('/', function (req, res) {
+//   res.render('index')
+// })
 
 app.listen(port, () => {
   console.log('\nNext TV corriendo en el puerto: ' + port + '\n')
