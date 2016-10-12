@@ -103,9 +103,17 @@ body
         position relative !important
   &:nth-last-child(2):first-child:hover .Movie-avatar img
     position relative !important
+  .Movie-name
+    absolute left 0 right 0 bottom 5px
+    background-color rgba(white, .85)
+    font-weight bold
+    padding 10px 5px
+    width 100%
+    z-index 3
   .Movie-avatar
     margin 0
     padding 0
+    overflow hidden
     width 100%
     img
       border-radius 2px
@@ -115,11 +123,8 @@ body
       width 100%
       z-index 1
       &:hover
-        position absolute
-        top -15px
-        left -15px
-        width 120%
-        z-index 2
+        filter grayscale(20%) blur(1px)
+        transform scale(1.1)
 
 .modal
   display none
@@ -167,18 +172,18 @@ body
 .SearchBox
   background #22A7F0
   background #f16d4e
-  border-radius 2px
+  border-radius 3px
   color #fff
   display flex
   align-items center
-  font-family 'Open Sans'
+  fontFamily('Open Sans')
   font-size 20px
   height 70px
-  left 10%
+  left 5%
   padding 0 10px
   position absolute
   top 180px
-  width 80%
+  width 90%
   .searchWord
     fontFamily('Dosis')
     text-decoration underline

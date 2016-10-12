@@ -59,23 +59,11 @@ const Search = React.createClass({
 })
 
 const MovieList = React.createClass({
-  listMovies($listMovies) {
-    if ($listMovies != []) {
-      return $listMovies.length
-        ? JSON.parse($listMovies).map(function(res) {
-          let movie = res.show ? res.show : res
-          return <MovieItem movie={movie}></MovieItem>
-        })
-        : 'Sorry... no movies...'
-      } else {
-        return <li>{$listMovies}</li>
-      }
-  },
   render() {
     return (
-      <ul className="Movies"> {
-        this.listMovies(this.props.movies)
-      } </ul>
+      <ul className="Movies">
+       <MovieItem movie={this.props.movies}></MovieItem>
+      </ul>
     )
   }
 })
@@ -131,16 +119,16 @@ const Template = React.createClass({
           <div id="content">
             <Menu/>
             <div className="container">
-              <MovieList movies={movies}/>
+              <MovieList search={search} movies={movies}/>
               <div className="SearchBox">
                 <h4>
                   Resultados para
                   <span className="searchWord">
-                    {this.props.search ? this.props.search.toUpperCase() : '...'}
+                    {movies.name ? movies.name.toUpperCase() : '...'}
                   </span>
                 </h4>
               </div>
-              <Search searchValue={search}/>
+              <Search searchValue={movies.name}/>
             </div>
           </div>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

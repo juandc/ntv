@@ -4,8 +4,8 @@
   "description": "NTV - TVify",
   "main": "server.js",
   "scripts": {
-    "build": "stylus -w styles/ -c -o public/styles/",
-    "dev": "stylus -w styles/ -c -o public/styles/ & nodemon server",
+    "build": "webpack --watch -d",
+    "dev": "webpack --watch & stylus -w styles/style.styl -c -o public/styles/ & node server",
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server"
@@ -30,19 +30,32 @@
   },
   "homepage": "https://github.com/juandc/ntv#readme",
   "devDependencies": {
+    "babel-loader": "^6.2.5",
+    "css-loader": "^0.25.0",
     "express": "^4.14.0",
+    "html2markdown": "^1.1.0",
+    "nib": "^1.1.2",
     "node-jsx": "^0.13.3",
+    "path": "^0.12.7",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-engine": "^4.1.0",
+    "remarkable": "^1.7.1",
+    "remarkable-react": "0.0.2",
     "request": "^2.75.0",
-    "nib": "^1.1.2",
+    "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
-    "react-engine": "^4.1.0"
+    "stylus-loader": "^2.3.1",
+    "webpack": "^1.13.2"
   },
   "dependencies": {
-    "html2markdown": "^1.1.0",
+    "eslint": "^3.7.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-config-airbnb-plus": "^5.0.1",
+    "eslint-plugin-import": "^2.0.1",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.1",
     "nodemon": "^1.11.0",
-    "remarkable": "^1.7.1",
-    "remarkable-react": "0.0.2"
+    "page": "^1.7.1"
   }
 }

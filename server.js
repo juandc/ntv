@@ -42,9 +42,19 @@ app.get('/', (req, res) => {
   console.log('Request for ' + search)
 })
 
-// app.get('/movies/:id', function (req, res) {
-//   res.render('movie')
-// })
+app.get('/movies/:id', (req, res) => {
+  request(`http://api.tvmaze.com/shows/${req.params.id}`, function (err, response, body) {
+    if (err || response.statusCode != 200) res.render('index')
+    let movies = new Object()
+    movies = JSON.parse(body)
+    res.render('singlemovie', {
+      title: movies.name,
+      search: req.params.id,
+      movies: movies,
+    })
+  })
+  console.log('Request for ' + req.params.id)
+})
 
 app.listen(port, () => {
   console.log('\nNext TV corriendo en el puerto: ' + port + '\n')
