@@ -4,10 +4,11 @@
   "description": "NTV - TVify",
   "main": "server.js",
   "scripts": {
+    "build": "stylus -w styles/ -c -o public/styles/",
+    "dev": "stylus -w styles/ -c -o public/styles/ & nodemon server",
     "start": "node server",
-    "server": "node server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "wserver": "nodemon server"
+    "server": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -34,9 +35,14 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "request": "^2.75.0",
+    "nib": "^1.1.2",
+    "stylus": "^0.54.5",
     "react-engine": "^4.1.0"
   },
   "dependencies": {
+    "html2markdown": "^1.1.0",
     "nodemon": "^1.11.0",
+    "remarkable": "^1.7.1",
+    "remarkable-react": "0.0.2"
   }
 }

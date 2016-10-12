@@ -1,0 +1,245 @@
+@import '../node_modules/nib/lib/nib/index.styl'
+@import 'mixins'
+@import 'random'
+
+html
+body
+  background-color #e5ebef
+  color #787e81
+  fontFamily('Open Sans')
+  margin 0
+  padding 0
+  overflow-x hidden
+  min-height 100vh
+
+body
+  display flex
+  flex-direction column
+  flex-wrap wrap
+  position relative
+  height auto
+  justify-content center
+
+.container
+  border-radius 2px
+  display flex
+  flex 1
+  flex-direction column
+  flex-wrap wrap
+  justify-content flex-start
+  margin 0 auto
+  max-width 650px
+  position relative
+  height auto
+  width 90%
+  &.content
+    margin-top 100px
+  &:before
+  &:after
+    content ''
+    display table
+
+.Menu
+  align-items center
+  background-color #f8f8f8
+  box-shadow 1px 1px 2px 2px #555
+  color #b2b2b2
+  display flex
+  fixed top 0 left 0 right 0
+  fontFamily('Roboto Condensed')
+  font-size 16px
+  height 60px
+  justify-content center
+  text-align center
+  width 100%
+  z-index 90
+  .container
+    position relative
+  &-logo
+    margin 0 0 0 30px
+    padding 0
+    text-align left
+    max-width 70px
+  &-icon
+    cursor pointer
+    font-size 22px
+    height 40px
+    text-decoration none
+    width 40px
+    &--logo
+      color #f16d4e
+      span
+        color #32353e
+        font-size 25px
+    &--bars
+      absolute top 28px right 20px bottom 0
+      font-size 30px
+
+.Movies
+  display flex
+  flex-wrap wrap
+  list-style none
+  margin 0 auto
+  padding 0
+  padding-top 280px
+  position relative
+
+.Movie
+  position relative
+  margin 10px 12px
+  width calc(50% - 24px)
+  width -webkit-calc(50% - 24px)
+  width -moz-calc(50% - 24px)
+  transition all .3s linear
+  &:only-child
+    margin 0
+    width calc(80% - 24px)
+    width -webkit-calc(80% - 24px)
+    width -moz-calc(80% - 24px)
+    max-width 100%
+  &:last-child
+    .Movie-avatar
+      img
+        position relative !important
+  &:nth-last-child(2):first-child:hover .Movie-avatar img
+    position relative !important
+  .Movie-avatar
+    margin 0
+    padding 0
+    width 100%
+    img
+      border-radius 2px
+      position initial
+      top 0
+      left 0
+      width 100%
+      z-index 1
+      &:hover
+        position absolute
+        top -15px
+        left -15px
+        width 120%
+        z-index 2
+
+.modal
+  display none
+
+.SearchForm
+  font-size 14px
+  font-weight 700
+  fontFamily('Open Sans')
+  left 10px
+  margin 0 auto
+  position absolute
+  right 10px
+  top 90px
+  width 90%
+  label
+    color #979995
+    display block
+    font-size 12px
+    letter-spacing 1px
+    text-transform uppercase
+  i
+    absolute top 28px left 12px
+  input
+  button
+    border 1px solid #ccc
+    color #444
+    fontFamily('Open Sans')
+    font-weight bold
+    height 38px
+    line-height 1.4
+    margin 0
+    padding 6px 14px
+  input
+    border-top-left-radius 3px
+    border-bottom-left-radius 3px
+    cursor text
+    padding-left 30px
+    width 70%
+  button
+    border-top-right-radius 3px
+    border-bottom-right-radius 3px
+    cursor pointer
+    width 30%
+
+.SearchBox
+  background #22A7F0
+  background #f16d4e
+  border-radius 2px
+  color #fff
+  display flex
+  align-items center
+  font-family 'Open Sans'
+  font-size 20px
+  height 70px
+  left 10%
+  padding 0 10px
+  position absolute
+  top 180px
+  width 80%
+  .searchWord
+    fontFamily('Dosis')
+    text-decoration underline
+    padding-left 5px
+
+@media screen and (min-width: 425px) and (max-width: 767px)
+  .Movie
+    margin 10px auto
+    margin-left 9%
+    max-width 170px
+    width 40%
+    &:only-child
+      max-width 100%
+      padding 0
+    &:nth-child(2n+2)
+      margin-left auto
+      margin-right 9%
+
+@media screen and (min-width: 624px) and (max-width: 767px)
+  .Movie
+    margin-left 12%
+    &:only-child
+      max-width 100%
+      padding 0
+    &:nth-child(2n-2)
+      margin-right 12%
+    &:nth-last-child(2)
+      margin auto !important
+
+@media screen and (min-width: 768px) and (max-width: 1023px)
+  .Movie
+    margin 10px auto
+    width 30%
+    max-width 150px
+    &:only-child
+      max-width 100%
+      padding 0
+    &:nth-last-child(2):first-child
+      max-width 40%
+      width auto
+      padding 0
+    &:nth-child(3n+1)
+      margin-left 5%
+    &:nth-child(3n+2)
+      margin 10px 0
+    &:nth-child(3n+3)
+      margin-right 5%
+
+@media screen and (min-width: 1024px)
+  .container
+    max-width 900px
+  .Movie
+    margin 15px auto
+    max-width 150px
+    width 20%
+    &:only-child
+      max-width 100%
+      padding 0
+    &:nth-child(4n+1)
+      margin-left 10%
+    &:nth-child(4n+4)
+      margin-right 10%
+    &:last-child:not(:nth-child(4n+4))
+      margin-right 10%
