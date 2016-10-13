@@ -13,6 +13,7 @@ $(document).ready(function(){
   $('#langer').click(function() {
     $('.dropdown-button').dropdown('open')
   });
+  $('#menu-bars').addClass('fa-bars')
 
   // Translate messages
   $('#es').text(translate.message('es'))

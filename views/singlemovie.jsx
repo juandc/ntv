@@ -27,7 +27,7 @@ const Menu = React.createClass({
       <nav className="Menu" id="Menu">
         <div className="container">
           <div className="Menu-icon Menu-icon--bars dropdown-button" id="langer" data-activates='lang'>
-            <i className="fa fa-bars" />
+            <i id ="menu-bars" className="fa" />
           </div>
           <figure id="logo" className="Menu-logo">
             <a className="Menu-icon Menu-icon--logo" href="/">
