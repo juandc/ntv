@@ -27,18 +27,20 @@ const Menu = React.createClass({
       <nav className="Menu" id="Menu">
         <div className="container">
           <div className="Menu-icon Menu-icon--bars dropdown-button" id="langer" data-activates='lang'>
-            <i id ="menu-bars" className="fa" />
+            <i className="fa fa-bars">
+              <input style={{opacity: 0}} type="checkbox" className="menu-bars"/>
+            </i>
+            <ul id='lang' className='dropdown-content'>
+              <li><i className="flag flag-en"/><a href='/en' id="en-US">{this.props.lang['en-US']}</a></li>
+              <li className="divider" />
+              <li><i className="flag flag-es"/><a href="/" id="es">{this.props.lang.es}</a></li>
+            </ul>
           </div>
           <figure id="logo" className="Menu-logo">
-            <a className="Menu-icon Menu-icon--logo" href="/">
+            <a className="Menu-icon Menu-icon--logo" href={this.props.lang ? '/en' : '/'}>
               <h2>N<span>tv</span></h2>
             </a>
           </figure>
-          <ul id='lang' className='dropdown-content'>
-            <li><i className="flag flag-en"/><a id="en-US">Ingles</a></li>
-            <li className="divider"></li>
-            <li><i className="flag flag-es"/><a id="es">Español</a></li>
-          </ul>
         </div>
       </nav>
     )
@@ -57,7 +59,7 @@ const Search = React.createClass({
           placeholder="robot"
           defaultValue={this.props.searchValue}
         />
-        <button id="search" type="submit">Buscar</button>
+        <button id="search" type="submit">{this.props.lang.search}</button>
       </form>
     )
   }
@@ -67,7 +69,7 @@ const MovieList = React.createClass({
   render() {
     return (
       <ul className="Movies">
-       <MovieItem movie={this.props.movies}></MovieItem>
+       <MovieItem movie={this.props.movies} lang={this.props.lang}></MovieItem>
       </ul>
     )
   }
@@ -85,7 +87,7 @@ const MovieItem = React.createClass({
     const des = md.render(html2markdown(movie.summary))
     return (
       <li key={movie.id} className="Movie" >
-        <a className="Movie-link" id={movie.id}>
+        <a className="Movie-link" href={`${this.props.lang ? '/en' : ''}/movies/${movie.id}`} id={movie.id}>
           <figure className="Movie-avatar">
             <img
               width="300"
@@ -114,26 +116,29 @@ const MovieItem = React.createClass({
 
 const Template = React.createClass({
   render() {
-    let title = this.props.title ? 'Ntv - ' + this.props.title : 'Ntv';
-    let search = this.props.search
-    let movies = this.props.movies
+    const title = this.props.title ? 'Ntv - ' + this.props.title : 'Ntv';
+    const search = this.props.search
+    const movies = this.props.movies
+    const es = { results: 'Resultados para', search: 'Buscar', es: 'Español', 'en-US': 'Ingles' }
+    const en = { results: 'Results for', search: 'Search', es: 'Spanish', 'en-US': 'English' }
+    const lang = this.props.lang ? es : en
     return (
       <html>
         <Head title={title}/>
         <body>
           <div id="content">
-            <Menu/>
+            <Menu lang={lang}/>
             <div className="container">
-              <MovieList search={search} movies={movies}/>
+              <MovieList search={search} lang={lang} movies={movies}/>
               <div className="SearchBox">
                 <h4>
-                  <h4 id="results">Resultados para</h4>
+                  <h4 id="results">{lang.results}</h4>
                   <span className="searchWord">
                     {movies.name ? movies.name.toUpperCase() : '...'}
                   </span>
                 </h4>
               </div>
-              <Search searchValue={movies.name}/>
+              <Search searchValue={movies.name} lang={lang}/>
             </div>
           </div>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

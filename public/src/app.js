@@ -55,25 +55,23 @@
 	}
 
 	$(document).ready(function(){
-	  // Dropdown
-	  $('#langer').click(function() {
-	    $('.dropdown-button').dropdown('open')
-	  });
-	  $('#menu-bars').addClass('fa-bars')
+	  // Dropdown (deprecated, using pure css)
+	  // $('#langer').click(function() {
+	  //   $('.dropdown-button').dropdown('open')
+	  // });
+	  // $('#menu-bars').addClass('fa-bars')
 
-	  // Translate messages
-	  $('#es').text(translate.message('es'))
-	  $('#en-US').text(translate.message('en-US'))
-	  $('#results').text(translate.message('results'))
-	  $('#search').text(translate.message('search'))
+	  // Translate messages (deprecated, using urls)
+	  // $('#es').text(translate.message('es'))
+	  // $('#en-US').text(translate.message('en-US'))
+	  // $('#results').text(translate.message('results'))
+	  // $('#search').text(translate.message('search'))
 
-	  // LocalStorage
+	  // Language
 	  $('#es').click(function() {
-	    localStorage.locale = 'es'
 	    window.location.reload(false);
 	  });
 	  $('#en-US').click(function() {
-	    localStorage.locale = 'en-US'
 	    window.location.reload(false);
 	  });
 
@@ -82,15 +80,17 @@
 	    page(`/movies/${$(this).attr('id')}`)
 	  })
 	  $('.modal-trigger').leanModal();
-	  page('/', function (ctx, res) {
-	    $('#modal').closeModal()
-	  })
+	  $('.Movie-link').attr('href', '');
 	  page('/movies/:id', function (ctx, res) {
 	    $(`#modal${ctx.params.id}`).openModal({
 	      complete: function() {
-	        window.history.back()
+	        page('/')
+	        window.history.go(-2)
 	      }
 	    })
+	  })
+	  page('*', function (ctx, res) {
+	    // $('#modal').closeModal()
 	  })
 	  page()
 	});
@@ -131,7 +131,7 @@
 
 
 	// module
-	exports.push([module.id, ".Movie {\n  cursor: pointer;\n}\n.modal {\n  background-color: #fafafa;\n  border-radius: 2px;\n  bottom: 10%;\n  display: none;\n  left: 0;\n  margin: auto;\n  max-height: 70%;\n  overflow-y: auto;\n  padding: 0;\n  position: fixed;\n  top: 10%;\n  right: 0;\n  width: 55%;\n  will-change: top, opacity;\n}\n.modal.modal-fixed-footer {\n  padding: 0;\n  height: 70%;\n}\n.modal.modal-fixed-footer .modal-content {\n  position: absolute;\n  height: calc(100% - 56px);\n  max-height: 100%;\n  width: 100%;\n  overflow-y: auto;\n}\n.modal.modal-fixed-footer .modal-footer {\n  border-top: 1px solid rgba(0,0,0,0.1);\n  position: absolute;\n  bottom: 0;\n}\n.modal.modal-fixed-footer .modal-content {\n  position: absolute;\n  height: calc(100% - 56px);\n  max-height: 100%;\n  width: 100%;\n  overflow-y: auto;\n}\n.modal.modal-fixed-footer .modal-footer {\n  border-top: 1px solid rgba(0,0,0,0.1);\n  position: absolute;\n  bottom: 0;\n}\n.modal.bottom-sheet {\n  top: auto;\n  bottom: -100%;\n  margin: 0;\n  width: 100%;\n  max-height: 45%;\n  border-radius: 0;\n  will-change: bottom, opacity;\n}\n.modal h1,\n.modal h2,\n.modal h3,\n.modal h4 {\n  margin-top: 0;\n}\n.modal .modal-content {\n  background-position: center;\n  -webkit-background-size: cover;\n  -moz-background-size: cover;\n  background-size: cover;\n  background-repeat: no-repeat;\n  padding: 24px;\n}\n.modal .modal-content .modal-cont {\n  background: rgba(255,255,255,0.8);\n  padding: 5px;\n}\n.modal .modal-content .modal-cont h2 {\n  font-family: 'Dosis';\n}\n.modal .modal-content .modal-cont p {\n  font-family: 'Open Sans';\n}\n.modal .modal-close {\n  cursor: pointer;\n}\n.modal .modal-footer {\n  background-color: #fafafa;\n  border-radius: 0 0 2px 2px;\n  padding: 4px 6px;\n  height: 56px;\n  width: 100%;\n}\n.modal .modal-footer .btn,\n.modal .modal-footer .btn-large,\n.modal .modal-footer .btn-flat {\n  background-color: #f00;\n  border-radius: 8px;\n  color: #fff;\n  float: right;\n  font-family: Arial, \"Helvetica Neue\", Helvetica, sans-serif;\n  font-weight: bold;\n  height: 30px;\n  margin: 8px;\n  padding: 5px 25px;\n  text-align: center;\n  text-decoration: none;\n  width: 150px;\n}\n.lean-overlay {\n  position: fixed;\n  z-index: 999;\n  top: -100px;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  height: 125%;\n  width: 100%;\n  background: #000;\n  display: none;\n  will-change: opacity;\n}\n.Movie-body {\n  overflow-y: scroll;\n}\n.Movie-img {\n  min-height: 300px;\n  max-height: 300px;\n  margin: 0 auto;\n  min-width: 100%;\n  width: auto;\n}\n.dropdown-content {\n  background-color: #fff;\n  display: none;\n  list-style: none;\n  margin: 0;\n  max-height: 650px;\n  min-width: 110px;\n  opacity: 0;\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)\";\n  filter: alpha(opacity=0);\n  overflow-y: auto;\n  padding: 0;\n  position: absolute;\n  will-change: width, height;\n  z-index: 999;\n}\n.dropdown-content li {\n  clear: both;\n  color: rgba(0,0,0,0.87);\n  cursor: pointer;\n  line-height: 1.5rem;\n  min-height: 50px;\n  text-align: left;\n  text-transform: none;\n  width: 100%;\n}\n.dropdown-content li:hover,\n.dropdown-content li.active,\n.dropdown-content li.selected {\n  background-color: #eee;\n}\n.dropdown-content li.active.selected {\n  background-color: #e1e1e1;\n  font-weight: bold;\n}\n.dropdown-content li.divider {\n  height: 1px;\n  min-height: 0;\n}\n.dropdown-content li > a,\n.dropdown-content li > span {\n  color: #26a69a;\n  color: #f16d4e;\n  display: block;\n  font-size: 16px;\n  line-height: 22px;\n  padding: 14px 16px;\n}\n.dropdown-content li > span > label {\n  height: 18px;\n  left: 3px;\n  top: 1px;\n}\n.dropdown-content li > a > i {\n  height: inherit;\n  line-height: inherit;\n}\n@media screen and (max-width: 500px) {\n  .modal {\n    width: 70%;\n  }\n}\n@media screen and (min-width: 1024px) {\n  .modal {\n    width: 700px;\n  }\n}\n", ""]);
+	exports.push([module.id, ".Movie {\n  cursor: pointer;\n}\n.modal {\n  background-color: #fafafa;\n  border-radius: 2px;\n  bottom: 10%;\n  display: none;\n  left: 0;\n  margin: auto;\n  max-height: 70%;\n  overflow-y: auto;\n  padding: 0;\n  position: fixed;\n  top: 10%;\n  right: 0;\n  width: 55%;\n  will-change: top, opacity;\n}\n.modal.modal-fixed-footer {\n  padding: 0;\n  height: 70%;\n}\n.modal.modal-fixed-footer .modal-content {\n  position: absolute;\n  height: calc(100% - 56px);\n  max-height: 100%;\n  width: 100%;\n  overflow-y: auto;\n}\n.modal.modal-fixed-footer .modal-footer {\n  border-top: 1px solid rgba(0,0,0,0.1);\n  position: absolute;\n  bottom: 0;\n}\n.modal.modal-fixed-footer .modal-content {\n  position: absolute;\n  height: calc(100% - 56px);\n  max-height: 100%;\n  width: 100%;\n  overflow-y: auto;\n}\n.modal.modal-fixed-footer .modal-footer {\n  border-top: 1px solid rgba(0,0,0,0.1);\n  position: absolute;\n  bottom: 0;\n}\n.modal.bottom-sheet {\n  top: auto;\n  bottom: -100%;\n  margin: 0;\n  width: 100%;\n  max-height: 45%;\n  border-radius: 0;\n  will-change: bottom, opacity;\n}\n.modal h1,\n.modal h2,\n.modal h3,\n.modal h4 {\n  margin-top: 0;\n}\n.modal .modal-content {\n  background-position: center;\n  -webkit-background-size: cover;\n  -moz-background-size: cover;\n  background-size: cover;\n  background-repeat: no-repeat;\n  padding: 24px;\n}\n.modal .modal-content .modal-cont {\n  background: rgba(255,255,255,0.8);\n  padding: 5px;\n}\n.modal .modal-content .modal-cont h2 {\n  font-family: 'Dosis';\n}\n.modal .modal-content .modal-cont p {\n  font-family: 'Open Sans';\n}\n.modal .modal-close {\n  cursor: pointer;\n}\n.modal .modal-footer {\n  background-color: #fafafa;\n  border-radius: 0 0 2px 2px;\n  padding: 4px 6px;\n  height: 56px;\n  width: 100%;\n}\n.modal .modal-footer .btn,\n.modal .modal-footer .btn-large,\n.modal .modal-footer .btn-flat {\n  background-color: #f00;\n  border-radius: 8px;\n  color: #fff;\n  float: right;\n  font-family: Arial, \"Helvetica Neue\", Helvetica, sans-serif;\n  font-weight: bold;\n  height: 30px;\n  margin: 8px;\n  padding: 5px 25px;\n  text-align: center;\n  text-decoration: none;\n  width: 150px;\n}\n.lean-overlay {\n  position: fixed;\n  z-index: 999;\n  top: -100px;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  height: 125%;\n  width: 100%;\n  background: #000;\n  display: none;\n  will-change: opacity;\n}\n.Movie-body {\n  overflow-y: scroll;\n}\n.Movie-img {\n  min-height: 300px;\n  max-height: 300px;\n  margin: 0 auto;\n  min-width: 100%;\n  width: auto;\n}\n@media screen and (max-width: 500px) {\n  .modal {\n    width: 70%;\n  }\n}\n@media screen and (min-width: 1024px) {\n  .modal {\n    width: 700px;\n  }\n}\n", ""]);
 
 	// exports
 

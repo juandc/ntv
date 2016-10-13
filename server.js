@@ -16,6 +16,7 @@ app.set('view engine', 'jsx')
 
 app.set('view', reactEngine.expressView)
 
+// Home redirects to Spanish
 app.get('/', (req, res) => {
   const search = req.query['search']
   if (search) {
@@ -42,6 +43,11 @@ app.get('/', (req, res) => {
   console.log('Request for ' + search)
 })
 
+// Spanish
+app.get('/es', (req, res) => {
+  res.redirect('/')
+})
+
 app.get('/movies/:id', (req, res) => {
   request(`http://api.tvmaze.com/shows/${req.params.id}`, function (err, response, body) {
     if (err || response.statusCode != 200) res.render('index')
@@ -51,6 +57,50 @@ app.get('/movies/:id', (req, res) => {
       title: movies.name,
       search: req.params.id,
       movies: movies,
+    })
+  })
+  console.log('Request for ' + req.params.id)
+})
+
+// English
+app.get('/en', (req, res) => {
+  const search = req.query['search']
+  if (search) {
+    request(`http://api.tvmaze.com/search/shows?q=${search.trim()}`, function (err, response, body) {
+      if (err || response.statusCode != 200) res.render('index')
+      let movies = body
+      res.render('index', {
+        title: search.toUpperCase(),
+        search: search,
+        movies: movies,
+        lang: 'en-US'
+      })
+    })
+  } else {
+    request(`http://api.tvmaze.com/shows`, function (err, response, body) {
+      if (err || response.statusCode != 200) res.render('index')
+      let movies = body
+      res.render('index', {
+        title: 'Home',
+        search: search,
+        movies: movies,
+        lang: 'en-US'
+      })
+    })
+  }
+  console.log('Request for ' + search)
+})
+
+app.get('/en/movies/:id', (req, res) => {
+  request(`http://api.tvmaze.com/shows/${req.params.id}`, function (err, response, body) {
+    if (err || response.statusCode != 200) res.render('index')
+    let movies = new Object()
+    movies = JSON.parse(body)
+    res.render('singlemovie', {
+      title: movies.name,
+      search: req.params.id,
+      movies: movies,
+      lang: 'en-US',
     })
   })
   console.log('Request for ' + req.params.id)
