@@ -108,6 +108,62 @@
   min-width 100%
   width auto
 
+.dropdown-content
+  background-color #fff
+  display none
+  list-style none
+  margin 0
+  max-height 650px
+  min-width 110px
+  opacity 0
+  overflow-y auto
+  padding 0
+  position absolute
+  will-change width, height
+  z-index 999
+
+.dropdown-content li
+  clear both
+  color rgba(0, 0, 0, 0.87)
+  cursor pointer
+  line-height 1.5rem
+  min-height 50px
+  text-align left
+  text-transform none
+  width 100%
+
+.dropdown-content li:hover
+.dropdown-content li.active
+.dropdown-content li.selected
+  background-color #eee
+
+.dropdown-content li.active.selected
+  background-color #e1e1e1
+  font-weight bold
+
+.dropdown-content li.divider
+  height 1px
+  min-height 0
+
+.dropdown-content li > a
+.dropdown-content li > span
+  color #26a69a
+  color #f16d4e
+  display block
+  font-size 16px
+  line-height 22px
+  padding 14px 16px
+
+.dropdown-content li > span > label
+  height 18px
+  left 3px
+  top 1px
+
+.dropdown-content li > a > i
+  height inherit
+  line-height inherit
+
+
 @media screen and (max-width: 500px)
   .modal
     width 70%

@@ -1,8 +1,36 @@
 require('../styles/modal.styl');
 
 const page = require('page');
+const translate = require('./translate');
+
+function lang(locale) {
+  localStorage.locale = locale;
+  window.location.reload(false);
+}
 
 $(document).ready(function(){
+  // Dropdown
+  $('#langer').click(function() {
+    $('.dropdown-button').dropdown('open')
+  });
+
+  // Translate messages
+  $('#es').text(translate.message('es'))
+  $('#en-US').text(translate.message('en-US'))
+  $('#results').text(translate.message('results'))
+  $('#search').text(translate.message('search'))
+
+  // LocalStorage
+  $('#es').click(function() {
+    localStorage.locale = 'es'
+    window.location.reload(false);
+  });
+  $('#en-US').click(function() {
+    localStorage.locale = 'en-US'
+    window.location.reload(false);
+  });
+
+  // Page
   $('.Movie-link').click(function() {
     page(`/movies/${$(this).attr('id')}`)
   })

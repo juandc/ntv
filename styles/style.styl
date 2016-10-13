@@ -127,7 +127,22 @@ body
         transform scale(1.1)
 
 .modal
+.dropdown-content
   display none
+
+.flag
+  background-repeat no-repeat
+  background-position center
+  background-size 30px
+  border-radius 3px
+  float left
+  margin 10px 5px
+  height 20px
+  width 30px
+  &-es
+    background-image url('/images/co.png')
+  &-en
+    background-image url('/images/us.png')
 
 .SearchForm
   font-size 14px
@@ -170,8 +185,9 @@ body
     width 30%
 
 .SearchBox
-  background #22A7F0
+  // background #22A7F0
   background #f16d4e
+  background linear-gradient(to right bottom, #f16d4e 55%, #E66545 55%)
   border-radius 3px
   color #fff
   display flex

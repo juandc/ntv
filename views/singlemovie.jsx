@@ -26,14 +26,19 @@ const Menu = React.createClass({
     return (
       <nav className="Menu" id="Menu">
         <div className="container">
-          <div className="Menu-icon Menu-icon--bars">
+          <div className="Menu-icon Menu-icon--bars dropdown-button" id="langer" data-activates='lang'>
             <i className="fa fa-bars" />
           </div>
-          <figure className="Menu-logo">
+          <figure id="logo" className="Menu-logo">
             <a className="Menu-icon Menu-icon--logo" href="/">
               <h2>N<span>tv</span></h2>
             </a>
           </figure>
+          <ul id='lang' className='dropdown-content'>
+            <li><i className="flag flag-en"/><a id="en-US">Ingles</a></li>
+            <li className="divider"></li>
+            <li><i className="flag flag-es"/><a id="es">Español</a></li>
+          </ul>
         </div>
       </nav>
     )
@@ -52,7 +57,7 @@ const Search = React.createClass({
           placeholder="robot"
           defaultValue={this.props.searchValue}
         />
-        <button type="submit">Buscar</button>
+        <button id="search" type="submit">Buscar</button>
       </form>
     )
   }
@@ -109,7 +114,7 @@ const MovieItem = React.createClass({
 
 const Template = React.createClass({
   render() {
-    let title = this.props.title ? 'NTV - ' + this.props.title : 'NTV';
+    let title = this.props.title ? 'Ntv - ' + this.props.title : 'Ntv';
     let search = this.props.search
     let movies = this.props.movies
     return (
@@ -122,7 +127,7 @@ const Template = React.createClass({
               <MovieList search={search} movies={movies}/>
               <div className="SearchBox">
                 <h4>
-                  Resultados para
+                  <h4 id="results">Resultados para</h4>
                   <span className="searchWord">
                     {movies.name ? movies.name.toUpperCase() : '...'}
                   </span>
