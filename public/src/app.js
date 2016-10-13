@@ -67,7 +67,10 @@
 	  // $('#results').text(translate.message('results'))
 	  // $('#search').text(translate.message('search'))
 
-	  // Language
+	  // Language and reloads
+	  $('#logo').click(function() {
+	    window.location.reload(false);
+	  });
 	  $('#es').click(function() {
 	    window.location.reload(false);
 	  });
@@ -84,13 +87,13 @@
 	  page('/movies/:id', function (ctx, res) {
 	    $(`#modal${ctx.params.id}`).openModal({
 	      complete: function() {
-	        page('/')
+	        // page('/')
 	        window.history.go(-2)
 	      }
 	    })
 	  })
 	  page('*', function (ctx, res) {
-	    // $('#modal').closeModal()
+	    $('#modal').closeModal()
 	  })
 	  page()
 	});

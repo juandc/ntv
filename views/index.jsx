@@ -26,15 +26,15 @@ const Menu = React.createClass({
     return (
       <nav className="Menu" id="Menu">
         <div className="container">
-          <div className="Menu-icon Menu-icon--bars dropdown-button" id="langer" data-activates='lang'>
-            <i className="fa fa-bars">
-              <input style={{opacity: 0}} type="checkbox" className="menu-bars"/>
-            </i>
-            <ul id='lang' className='dropdown-content'>
-              <li><i className="flag flag-en"/><a href='/en' id="en-US">{this.props.lang['en-US']}</a></li>
-              <li className="divider"/>
-              <li><i className="flag flag-es"/><a href="/" id="es">{this.props.lang.es}</a></li>
-            </ul>
+          <div className="Menu-icon Menu-icon--bars" id="langer">
+            <label style={{cursor: 'pointer'}} className="mmenu fa fa-bars">
+              <input type="checkbox" id="menu-bars"/>
+              <ul id='lang' className='dropdown-cont'>
+                <li><i className="flag flag-en"/><a href='/en' id="en-US">{this.props.lang['en-US']}</a></li>
+                <li className="divider"/>
+                <li><i className="flag flag-es"/><a href="/" id="es">{this.props.lang.es}</a></li>
+              </ul>
+            </label>
           </div>
           <figure id="logo" className="Menu-logo">
             <a className="Menu-icon Menu-icon--logo" href={this.props.lang ? '/en' : '/'}>

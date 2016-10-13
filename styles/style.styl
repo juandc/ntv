@@ -127,7 +127,7 @@ body
         filter grayscale(20%) blur(1px)
         transform scale(1.1)
 
-.dropdown-content
+.dropdown-cont
   background-color #fff
   list-style none
   margin 0
@@ -168,6 +168,7 @@ body
     color #26a69a
     color #f16d4e
     display block
+    fontFamily('Roboto Condensed')
     font-size 16px
     line-height 22px
     padding 14px 16px
@@ -180,10 +181,17 @@ body
     height inherit
     line-height inherit
 
-.dropdown-content
+.dropdown-cont
   display none
 
-.menu-bars:checked ~ .dropdown-content
+#menu-bars
+  absolute top 0 left 0 right 0 bottom 0
+  height 100vh
+  width 100vw
+  opacity 0
+
+#menu-bars:checked ~ .dropdown-cont
+#menu-bars:checked + .dropdown-cont
   display block
 
 .modal
