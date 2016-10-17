@@ -16,7 +16,7 @@ app.set('view engine', 'jsx')
 
 app.set('view', reactEngine.expressView)
 
-// Home redirects to Spanish
+// Spanish
 app.get('/', (req, res) => {
   const search = req.query['search']
   if (search) {
@@ -43,11 +43,12 @@ app.get('/', (req, res) => {
   console.log('Request for ' + search)
 })
 
-// Spanish
+// Spanish redirects to Home
 app.get('/es', (req, res) => {
   res.redirect('/')
 })
 
+// Spanish movies
 app.get('/movies/:id', (req, res) => {
   request(`http://api.tvmaze.com/shows/${req.params.id}`, function (err, response, body) {
     if (err || response.statusCode != 200) res.render('index')
@@ -91,6 +92,7 @@ app.get('/en', (req, res) => {
   console.log('Request for ' + search)
 })
 
+// English Movies
 app.get('/en/movies/:id', (req, res) => {
   request(`http://api.tvmaze.com/shows/${req.params.id}`, function (err, response, body) {
     if (err || response.statusCode != 200) res.render('index')

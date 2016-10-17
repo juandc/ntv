@@ -50,7 +50,7 @@ const Menu = React.createClass({
 const Search = React.createClass({
   render() {
     return (
-      <form className="SearchForm SearchForm--charging" action={this.props.lang ? '/en' : '/'} method="GET">
+      <form className="SearchForm SearchForm--charging" action={this.props.lang.es == 'Spanish' ? '/en' : '/'} method="GET">
         <label htmlFor="search">Search movies: </label>
         <i className="fa fa-search"/>
         <input
@@ -67,22 +67,18 @@ const Search = React.createClass({
 
 const MovieList = React.createClass({
   listMovies($listMovies, lang) {
-    if ($listMovies != []) {
-      return $listMovies.length
-        ? JSON.parse($listMovies).map(function(res) {
+    return $listMovies.length
+      ? JSON.parse($listMovies).slice(0, 20).map(function(res) {
           let movie = res.show ? res.show : res
           return <MovieItem movie={movie} lang={lang}></MovieItem>
         })
-        : 'Sorry... no movies...'
-      } else {
-        return <li>{$listMovies}</li>
-      }
+      : 'Sorry... no movies...'
   },
   render() {
     return (
       <ul className="Movies"> {
         this.listMovies(this.props.movies, this.props.lang)
-      } </ul>
+      }</ul>
     )
   }
 })
@@ -94,11 +90,12 @@ const MovieItem = React.createClass({
       ? JSON.stringify(movie.image.medium).split('"').join('')
       : 'http://tvmazecdn.com/images/no-img/no-img-portrait-text.png'
     const styles = { backgroundImage: 'url(' + pic + ')' }
+    const hidden = this.props.view ? { display: 'none' } : {}
     const md = new Remarkable()
     md.renderer = new RemarkableReact()
     const des = md.render(html2markdown(movie.summary))
     return (
-      <li key={movie.id} className="Movie" >
+      <li key={movie.id} className="Movie FirstLoad" style={ hidden }>
         <a className="Movie-link" href={`${this.props.lang ? '/en' : ''}/movies/${movie.id}`} id={movie.id}>
           <figure className="Movie-avatar">
             <img
@@ -110,7 +107,7 @@ const MovieItem = React.createClass({
             <span className="Movie-name">{movie.name}</span>
           </figure>
         </a>
-        <div id={`modal${movie.id}`} className="modal modal-fixed-footer">
+        <div id={`modal${movie.id}`} className="modal modal-fixed-footer FirstLoad">
           <div className="modal-content" style={styles}>
             <div className="modal-cont">
               <h2>{movie.name}</h2>
@@ -144,7 +141,7 @@ const Template = React.createClass({
               <MovieList movies={movies} lang={lang}/>
               <div className="SearchBox">
                 <h4>
-                  <h4 id="results">{lang.results}</h4>
+                  <span id="results">{lang.results}</span>
                   <span className="searchWord">
                     {this.props.search ? this.props.search.toUpperCase() : '...'}
                   </span>

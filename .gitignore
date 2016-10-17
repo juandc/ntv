@@ -36,5 +36,8 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+# Not idea what does it does
+.js.map
+
 # Sublime Project
 .sublime-project

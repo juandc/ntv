@@ -1,6 +1,6 @@
 {
   "name": "ntv",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "NTV - TVify",
   "main": "server.js",
   "scripts": {
